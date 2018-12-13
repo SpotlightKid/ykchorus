@@ -1,6 +1,6 @@
 # YK Chorus
 
-A chorus effect inspired by the the one found on certain well-known Japanese
+A chorus effect inspired by the one found in certain well-known Japanese
 vintage analog synthesizers (**Y**ou **K**now which).
 
 
@@ -33,11 +33,11 @@ or bundles or the stand-alone program to the appropriate locations.
 
 The following command line examples assume you are using a Linux system:
 
-    $ install -dm755 bin/ykchorus -t ~/bin
-    $ install -dm755 bin/ykchorus-vst.so -t ~/.vst
-    $ install -dm755 bin/ykchorus-dssi.so -t ~/.dssi
-    $ install -dm755 bin/ykchorus-ladspa.so -t ~/.ladspa
-    $ mkdir -p ~/.lv2; copy -a bin/ykchorus.lv2 -t ~/.lv2
+    $ install -Dm755 bin/ykchorus -t ~/bin
+    $ install -Dm755 bin/ykchorus-vst.so -t ~/.vst
+    $ install -Dm755 bin/ykchorus-dssi.so -t ~/.dssi
+    $ install -Dm755 bin/ykchorus-ladspa.so -t ~/.ladspa
+    $ mkdir -p ~/.lv2; cp -a bin/ykchorus.lv2 -t ~/.lv2
 
 
 ## Prerequisites

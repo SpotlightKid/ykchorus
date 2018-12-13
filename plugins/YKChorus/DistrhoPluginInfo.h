@@ -1,5 +1,5 @@
 /*
- * YK Chorus audio efffect based on DISTRHO Plugin Framework (DPF)
+ * YK Chorus audio effect based on DISTRHO Plugin Framework (DPF)
  * Copyright (C) 2018 Christopher Arndt <chris@chrisarndt.de>
  *
  * This file may be licensed under the terms of of the
