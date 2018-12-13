@@ -102,7 +102,7 @@ protected:
     // -------------------------------------------------------------------
 
 private:
-    float    fParams[paramCount];
+    float    fParams[paramCount] = {0.0f, 0.0f};
     double   fSampleRate;
     ChorusEngine * cengine;
 

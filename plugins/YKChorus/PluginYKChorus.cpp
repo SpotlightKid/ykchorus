@@ -27,8 +27,7 @@ START_NAMESPACE_DISTRHO
 PluginYKChorus::PluginYKChorus()
     : Plugin(paramCount, 3, 0)  // paramCount params, 3 program(s), 0 states
 {
-    sampleRateChanged(getSampleRate());
-    cengine = new ChorusEngine(fSampleRate);
+    cengine = new ChorusEngine(getSampleRate());
     loadProgram(0);
 }
 
@@ -87,7 +86,11 @@ void PluginYKChorus::initProgramName(uint32_t index, String& programName) {
   Optional callback to inform the plugin about a sample rate change.
 */
 void PluginYKChorus::sampleRateChanged(double newSampleRate) {
-    fSampleRate = newSampleRate;
+    if (newSampleRate != fSampleRate) {
+        fSampleRate = newSampleRate;
+        cengine->setSampleRate(newSampleRate);
+        cengine->setEnablesChorus(fParams[paramChorus1Enable], fParams[paramChorus2Enable]);
+    }
 }
 
 /**
@@ -139,7 +142,7 @@ void PluginYKChorus::loadProgram(uint32_t index) {
 
 void PluginYKChorus::activate() {
     // plugin is activated
-    cengine->setSampleRate(fSampleRate);
+    sampleRateChanged(fSampleRate);
 }
 
 void PluginYKChorus::run(const float** inputs, float** outputs, uint32_t frames) {
