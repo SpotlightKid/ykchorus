@@ -70,7 +70,6 @@ public:
     void setSampleRate(float sampleRate)
     {
         setUpChorus(sampleRate);
-        setEnablesChorus(false, false);
     }
 
     void setEnablesChorus(bool isChorus1Enabled, bool isChorus2Enabled)
