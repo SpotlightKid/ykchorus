@@ -46,7 +46,7 @@ protected:
     }
 
     const char* getDescription() const override {
-        return "A chorus effect inspired by the one found in certain well-known Japanese vintage analog synthesizers";
+        return "A chorus effect inspired by well-known Japanese analog synthesizers";
     }
 
     const char* getMaker() const noexcept override {
@@ -102,7 +102,7 @@ protected:
     // -------------------------------------------------------------------
 
 private:
-    float    fParams[paramCount] = {0.0f, 0.0f};
+    float    fParams[paramCount];
     double   fSampleRate;
     ChorusEngine * cengine;
 
