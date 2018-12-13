@@ -151,7 +151,7 @@ void PluginYKChorus::run(const float** inputs, float** outputs, uint32_t frames)
     float* const outL = outputs[0];
     float* const outR = outputs[1];
 
-    // apply gain against all samples
+    // apply effect on all samples
     for (uint32_t i=0; i < frames; ++i) {
         outL[i] = inpL[i];
         outR[i] = inpR[i];
