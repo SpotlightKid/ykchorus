@@ -78,6 +78,18 @@ public:
         this->isChorus2Enabled = isChorus2Enabled;
     }
 
+    void setChorus1LfoRate(float rate)
+    {
+        chorus1L->setLfoRate(rate);
+        chorus1R->setLfoRate(rate);
+    }
+
+    void setChorus2LfoRate(float rate)
+    {
+        chorus2L->setLfoRate(rate);
+        chorus2R->setLfoRate(rate);
+    }
+
     void setUpChorus(float sampleRate)
     {
         chorus1L = new Chorus(sampleRate, 1.0f, 0.5f, 7.0f);

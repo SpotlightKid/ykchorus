@@ -93,6 +93,11 @@ public:
         delete lp;
     }
 
+    void setLfoRate(float rate)
+    {
+        lfoStepSize = (4.0f * rate / sampleRate);
+    }
+
     float process(float *sample)
     {
         // Get delay time

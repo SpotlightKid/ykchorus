@@ -31,6 +31,8 @@ public:
     enum Parameters {
         paramChorus1Enable = 0,
         paramChorus2Enable,
+        paramChorus1LfoRate,
+        paramChorus2LfoRate,
         paramCount
     };
 

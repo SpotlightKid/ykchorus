@@ -53,14 +53,28 @@ void PluginYKChorus::initParameter(uint32_t index, Parameter& parameter) {
 
     switch (index) {
         case paramChorus1Enable:
-            parameter.name = "Chorus Type 1";
+            parameter.name = "Chorus 1 On/Off";
             parameter.symbol = "chorus_1_enable";
             parameter.hints |= kParameterIsBoolean;
             break;
         case paramChorus2Enable:
-            parameter.name = "Chorus Type 2";
+            parameter.name = "Chorus 2 On/Off";
             parameter.symbol = "chorus_2_enable";
             parameter.hints |= kParameterIsBoolean;
+            break;
+        case paramChorus1LfoRate:
+            parameter.name = "Chorus 1 LFO Rate";
+            parameter.symbol = "chorus_1_lfo_rate";
+            parameter.ranges.min = 0.1f;
+            parameter.ranges.max = 10.0f;
+            parameter.ranges.def = 5.0f;
+            break;
+        case paramChorus2LfoRate:
+            parameter.name = "Chorus 2 LFO Rate";
+            parameter.symbol = "chorus_2_lfo_rate";
+            parameter.ranges.min = 0.1f;
+            parameter.ranges.max = 10.0f;
+            parameter.ranges.def = 8.3f;
             break;
     }
 }
@@ -116,6 +130,12 @@ void PluginYKChorus::setParameterValue(uint32_t index, float value) {
         case paramChorus2Enable:
             cengine->setEnablesChorus(fParams[paramChorus1Enable], fParams[paramChorus2Enable]);
             break;
+        case paramChorus1LfoRate:
+            cengine->setChorus1LfoRate(value / 10.0f);
+            break;
+        case paramChorus2LfoRate:
+            cengine->setChorus2LfoRate(value / 10.0f);
+            break;
     }
 }
 
@@ -129,14 +149,20 @@ void PluginYKChorus::loadProgram(uint32_t index) {
         case 0:
             setParameterValue(paramChorus1Enable, 1.0f);
             setParameterValue(paramChorus2Enable, 0.0f);
+            setParameterValue(paramChorus1LfoRate, 5.0f);
+            setParameterValue(paramChorus2LfoRate, 8.3f);
             break;
         case 1:
             setParameterValue(paramChorus1Enable, 0.0f);
             setParameterValue(paramChorus2Enable, 1.0f);
+            setParameterValue(paramChorus1LfoRate, 5.0f);
+            setParameterValue(paramChorus2LfoRate, 8.3f);
             break;
         case 2:
             setParameterValue(paramChorus1Enable, 1.0f);
             setParameterValue(paramChorus2Enable, 1.0f);
+            setParameterValue(paramChorus1LfoRate, 5.0f);
+            setParameterValue(paramChorus2LfoRate, 8.3f);
             break;
     }
 }
