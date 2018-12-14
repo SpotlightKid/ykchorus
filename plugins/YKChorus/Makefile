@@ -13,7 +13,6 @@ NAME = ykchorus
 # Files to build
 
 FILES_DSP = \
-	Lfo.cpp \
 	PluginYKChorus.cpp
 
 # --------------------------------------------------------------

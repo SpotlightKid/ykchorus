@@ -16,7 +16,7 @@
 
 	You should have received a copy of the GPL along with this
 	program. If not, go to http://www.gnu.org/licenses/gpl.html
-	or write to the Free Software Foundation, Inc.,  
+	or write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 	==============================================================================
  */
@@ -24,14 +24,12 @@
 #if !defined(__Chorus_h)
 #define __Chorus_h
 
-#include "Lfo.h"
 #include "OnePoleLP.h"
 #include "math.h"
 
-class Chorus 
+class Chorus
 {
 public:
-	Lfo *lfo;
 	float *delayLineStart;
 	float *delayLineEnd;
 	float *writePtr;
@@ -52,7 +50,7 @@ public:
 	float z1, z2;
 	float mult, sign;
 
-	// lfo 
+	// lfo
 	float lfoPhase, lfoStepSize, lfoSign;
 
 	Chorus(float sampleRate, float phase, float rate, float delayTime)
@@ -60,9 +58,6 @@ public:
 		this->rate= rate;
 		this->sampleRate= sampleRate;
 		this->delayTime= delayTime;
-		lfo= new Lfo(sampleRate);
-		lfo->phase= phase;
-		lfo->setRate(rate);
 		z1= z2= 0.0f;
 		sign= 0;
 		lfoPhase= phase*2.0f-1.0f;
@@ -96,10 +91,9 @@ public:
     {
         delete[] delayLineStart;
         delete lp;
-        delete lfo;
     }
 
-	float process(float *sample) 
+	float process(float *sample)
 	{
 		// Get delay time
 		offset= (nextLFO()*0.3f+0.4f)*delayTime*sampleRate*0.001f;
@@ -133,11 +127,11 @@ public:
 
 	inline float nextLFO()
 	{
-		if (lfoPhase>=1.0f) 
+		if (lfoPhase>=1.0f)
 		{
 			lfoSign= -1.0f;
-		} 
-		else if (lfoPhase<=-1.0f) 
+		}
+		else if (lfoPhase<=-1.0f)
 		{
 			lfoSign= +1.0f;
 		}
