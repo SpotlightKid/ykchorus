@@ -16,7 +16,7 @@
 
 	You should have received a copy of the GPL along with this
 	program. If not, go to http://www.gnu.org/licenses/gpl.html
-	or write to the Free Software Foundation, Inc.,  
+	or write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 	==============================================================================
  */
@@ -24,12 +24,12 @@
 #if !defined(__OnePoleLP_h)
 #define __OnePoleLP_h
 
-class OnePoleLP 
+class OnePoleLP
 {
  public:
   float inputs, outputs, lastOutput;
 
-  OnePoleLP() 
+  OnePoleLP()
   {
     lastOutput = inputs = outputs = 0.0f;
   }
@@ -38,7 +38,7 @@ class OnePoleLP
   {
   }
 
-  void tick(float *sample, float cutoff) 
+  void tick(float *sample, float cutoff)
   {
     float p = (cutoff*0.98f)*(cutoff*0.98f)*(cutoff*0.98f)*(cutoff*0.98f);
     outputs = (1.0f-p)*(*sample) + p*outputs;

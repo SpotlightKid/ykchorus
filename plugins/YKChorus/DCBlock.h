@@ -16,7 +16,7 @@
 
 	You should have received a copy of the GPL along with this
 	program. If not, go to http://www.gnu.org/licenses/gpl.html
-	or write to the Free Software Foundation, Inc.,  
+	or write to the Free Software Foundation, Inc.,
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 	==============================================================================
  */
@@ -24,12 +24,12 @@
 #if !defined(__DCBlock_h)
 #define __DCBlock_h
 
-class DCBlock 
+class DCBlock
 {
  public:
   float inputs, outputs, lastOutput;
 
-  DCBlock() 
+  DCBlock()
   {
     lastOutput = inputs = outputs = 0.0f;
   }
@@ -38,7 +38,7 @@ class DCBlock
   {
   }
 
-  inline void tick(float *sample, float cutoff) 
+  inline void tick(float *sample, float cutoff)
   {
     outputs     = *sample-inputs+(0.999f-cutoff*0.4f)*outputs;
     inputs      = *sample;
