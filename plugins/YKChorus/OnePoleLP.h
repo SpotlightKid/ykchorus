@@ -40,9 +40,9 @@ class OnePoleLP
 
   void tick(float *sample, float cutoff)
   {
-    float p = (cutoff*0.98f)*(cutoff*0.98f)*(cutoff*0.98f)*(cutoff*0.98f);
-    outputs = (1.0f-p)*(*sample) + p*outputs;
-    *sample= outputs;
+    float p = (cutoff * 0.98f) * (cutoff * 0.98f) * (cutoff * 0.98f) * (cutoff * 0.98f);
+    outputs = (1.0f - p) * (*sample) + p * outputs;
+    *sample = outputs;
   }
 };
 

@@ -40,7 +40,7 @@ class DCBlock
 
   inline void tick(float *sample, float cutoff)
   {
-    outputs     = *sample-inputs+(0.999f-cutoff*0.4f)*outputs;
+    outputs     = *sample - inputs + (0.999f - cutoff * 0.4f) * outputs;
     inputs      = *sample;
     lastOutput  = outputs;
     *sample     = lastOutput;

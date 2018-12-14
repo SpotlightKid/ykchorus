@@ -46,10 +46,10 @@ public:
 
     ChorusEngine(float sampleRate)
     {
-        dcBlock1L= new DCBlock();
-        dcBlock1R= new DCBlock();
-        dcBlock2L= new DCBlock();
-        dcBlock2R= new DCBlock();
+        dcBlock1L = new DCBlock();
+        dcBlock1R = new DCBlock();
+        dcBlock2L = new DCBlock();
+        dcBlock2R = new DCBlock();
 
         setUpChorus(sampleRate);
     }
@@ -80,32 +80,32 @@ public:
 
     void setUpChorus(float sampleRate)
     {
-        chorus1L= new Chorus(sampleRate, 1.0f, 0.5f, 7.0f);
-        chorus1R= new Chorus(sampleRate, 0.0f, 0.5f, 7.0f);
-        chorus2L= new Chorus(sampleRate, 0.0f, 0.83f, 7.0f);
-        chorus2R= new Chorus(sampleRate, 1.0f, 0.83f, 7.0f);
+        chorus1L = new Chorus(sampleRate, 1.0f, 0.5f, 7.0f);
+        chorus1R = new Chorus(sampleRate, 0.0f, 0.5f, 7.0f);
+        chorus2L = new Chorus(sampleRate, 0.0f, 0.83f, 7.0f);
+        chorus2R = new Chorus(sampleRate, 1.0f, 0.83f, 7.0f);
     }
 
     inline void process(float *sampleL, float *sampleR)
     {
-        float resultR= 0.0f;
-        float resultL= 0.0f;
+        float resultR = 0.0f;
+        float resultL = 0.0f;
         if (isChorus1Enabled)
         {
-            resultL+= chorus1L->process(sampleL);
-            resultR+= chorus1R->process(sampleR);
+            resultL += chorus1L->process(sampleL);
+            resultR += chorus1R->process(sampleR);
             dcBlock1L->tick(&resultL, 0.01f);
             dcBlock1R->tick(&resultR, 0.01f);
         }
         if (isChorus2Enabled)
         {
-            resultL+= chorus2L->process(sampleL);
-            resultR+= chorus2R->process(sampleR);
+            resultL += chorus2L->process(sampleL);
+            resultR += chorus2R->process(sampleR);
             dcBlock2L->tick(&resultL, 0.01f);
             dcBlock2R->tick(&resultR, 0.01f);
         }
-        *sampleL= *sampleL+resultL*1.4f;
-        *sampleR= *sampleR+resultR*1.4f;
+        *sampleL = *sampleL + resultL * 1.4f;
+        *sampleR = *sampleR + resultR * 1.4f;
     }
 };
 

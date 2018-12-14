@@ -55,27 +55,27 @@ public:
 
 	Chorus(float sampleRate, float phase, float rate, float delayTime)
 	{
-		this->rate= rate;
-		this->sampleRate= sampleRate;
-		this->delayTime= delayTime;
-		z1= z2= 0.0f;
-		sign= 0;
-		lfoPhase= phase*2.0f-1.0f;
-		lfoStepSize= (4.0f*rate/sampleRate);
-		lfoSign= 1.0f;
+		this->rate = rate;
+		this->sampleRate = sampleRate;
+		this->delayTime = delayTime;
+		z1 = z2 = 0.0f;
+		sign = 0;
+		lfoPhase = phase * 2.0f - 1.0f;
+		lfoStepSize = (4.0f * rate / sampleRate);
+		lfoSign = 1.0f;
 
 		//compute required buffer size for desired d0elay and allocate for it
 		//add extra point to aid in interpolation later
-		delayLineLength= ((int)floorf(delayTime*sampleRate*0.001f) * 2);
-		delayLineStart= new float[delayLineLength];
+		delayLineLength = ((int)floorf(delayTime * sampleRate * 0.001f) * 2);
+		delayLineStart = new float[delayLineLength];
 
 		//set up pointers for delay line
-		delayLineEnd= delayLineStart + delayLineLength;
-		writePtr= delayLineStart;
+		delayLineEnd = delayLineStart + delayLineLength;
+		writePtr = delayLineStart;
 
 		//zero out the buffer (silence)
 		do {
-			*writePtr= 0.0f;
+			*writePtr = 0.0f;
 		}
 		while (++writePtr < delayLineEnd);
 
@@ -96,46 +96,46 @@ public:
 	float process(float *sample)
 	{
 		// Get delay time
-		offset= (nextLFO()*0.3f+0.4f)*delayTime*sampleRate*0.001f;
+		offset = (nextLFO() * 0.3f + 0.4f) * delayTime * sampleRate * 0.001f;
 
 		//compute the largest read pointer based on the offset.  If ptr
 		//is before the first delayline location, wrap around end point
-		ptr = writePtr-(int)floorf(offset);
-		if (ptr<delayLineStart)
-			ptr+= delayLineLength;
+		ptr = writePtr - (int)floorf(offset);
+		if (ptr < delayLineStart)
+			ptr += delayLineLength;
 
-		ptr2= ptr-1;
-		if (ptr2<delayLineStart)
-			ptr2+= delayLineLength;
+		ptr2 = ptr - 1;
+		if (ptr2 < delayLineStart)
+			ptr2 += delayLineLength;
 
-		frac= offset-(int)floorf(offset);
-		delayLineOutput= *ptr2+*ptr*(1-frac)-(1-frac)*z1;
+		frac = offset - (int)floorf(offset);
+		delayLineOutput = *ptr2 + *ptr * (1 - frac) - (1 - frac) * z1;
 		z1 = delayLineOutput;
 
 		// Low pass
 		lp->tick(&delayLineOutput, 0.95f);
 
 		//write the input sample and any feedback to delayline
-		*writePtr= *sample;
+		*writePtr = *sample;
 
 		//increment buffer index and wrap if necesary
-		if (++writePtr>=delayLineEnd) {
-			writePtr= delayLineStart;
+		if (++writePtr >= delayLineEnd) {
+			writePtr = delayLineStart;
 		}
 		return delayLineOutput;
 	}
 
 	inline float nextLFO()
 	{
-		if (lfoPhase>=1.0f)
+		if (lfoPhase >= 1.0f)
 		{
-			lfoSign= -1.0f;
+			lfoSign = -1.0f;
 		}
-		else if (lfoPhase<=-1.0f)
+		else if (lfoPhase <= -1.0f)
 		{
-			lfoSign= +1.0f;
+			lfoSign = +1.0f;
 		}
-		lfoPhase+= lfoStepSize*lfoSign;
+		lfoPhase += lfoStepSize * lfoSign;
 		return lfoPhase;
 	}
 };

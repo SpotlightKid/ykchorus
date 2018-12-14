@@ -159,7 +159,7 @@ void PluginYKChorus::run(const float** inputs, float** outputs, uint32_t frames)
     float* const outR = outputs[1];
 
     // apply effect on all samples
-    for (uint32_t i=0; i < frames; ++i) {
+    for (uint32_t i = 0; i < frames; ++i) {
         outL[i] = inpL[i];
         outR[i] = inpR[i];
         cengine->process(&outL[i], &outR[i]);
