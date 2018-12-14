@@ -27,7 +27,7 @@ START_NAMESPACE_DISTRHO
 PluginYKChorus::PluginYKChorus()
     : Plugin(paramCount, 3, 0)  // paramCount params, 3 program(s), 0 states
 {
-    for (uint i; i < paramCount; i++) {
+    for (uint i = 0; i < paramCount; i++) {
         fParams[i] = 0.0f;
     }
     fSampleRate = -1;
