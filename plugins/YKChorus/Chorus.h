@@ -47,7 +47,7 @@ public:
     int readPos;
 
     OnePoleLP *lp;
-    float z1, z2;
+    float z1;
     float mult, sign;
 
     // lfo
@@ -58,7 +58,7 @@ public:
         this->rate = rate;
         this->sampleRate = sampleRate;
         this->delayTime = delayTime;
-        z1 = z2 = 0.0f;
+        z1 = 0.0f;
         sign = 0;
         lfoPhase = phase * 2.0f - 1.0f;
         lfoStepSize = (4.0f * rate / sampleRate);
