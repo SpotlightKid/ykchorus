@@ -28,8 +28,7 @@
 #include "DCBlock.h"
 
 
-class ChorusEngine
-{
+class ChorusEngine {
 public:
     Chorus *chorus1L;
     Chorus *chorus1R;
@@ -44,8 +43,7 @@ public:
     bool isChorus1Enabled;
     bool isChorus2Enabled;
 
-    ChorusEngine(float sampleRate)
-    {
+    ChorusEngine(float sampleRate) {
         dcBlock1L = new DCBlock();
         dcBlock1R = new DCBlock();
         dcBlock2L = new DCBlock();
@@ -54,8 +52,7 @@ public:
         setUpChorus(sampleRate);
     }
 
-    ~ChorusEngine()
-    {
+    ~ChorusEngine() {
         delete chorus1L;
         delete chorus1R;
         delete chorus2L;
@@ -64,42 +61,35 @@ public:
         delete dcBlock1R;
         delete dcBlock2L;
         delete dcBlock2R;
-
     }
 
-    void setSampleRate(float sampleRate)
-    {
+    void setSampleRate(float sampleRate) {
         setUpChorus(sampleRate);
     }
 
-    void setEnablesChorus(bool isChorus1Enabled, bool isChorus2Enabled)
-    {
+    void setEnablesChorus(bool isChorus1Enabled, bool isChorus2Enabled) {
         this->isChorus1Enabled = isChorus1Enabled;
         this->isChorus2Enabled = isChorus2Enabled;
     }
 
-    void setChorus1LfoRate(float rate)
-    {
+    void setChorus1LfoRate(float rate) {
         chorus1L->setLfoRate(rate);
         chorus1R->setLfoRate(rate);
     }
 
-    void setChorus2LfoRate(float rate)
-    {
+    void setChorus2LfoRate(float rate) {
         chorus2L->setLfoRate(rate);
         chorus2R->setLfoRate(rate);
     }
 
-    void setUpChorus(float sampleRate)
-    {
+    void setUpChorus(float sampleRate) {
         chorus1L = new Chorus(sampleRate, 1.0f, 0.5f, 7.0f);
         chorus1R = new Chorus(sampleRate, 0.0f, 0.5f, 7.0f);
         chorus2L = new Chorus(sampleRate, 0.0f, 0.83f, 7.0f);
         chorus2R = new Chorus(sampleRate, 1.0f, 0.83f, 7.0f);
     }
 
-    inline void process(float *sampleL, float *sampleR)
-    {
+    inline void process(float *sampleL, float *sampleR) {
         float resultR = 0.0f;
         float resultL = 0.0f;
         if (isChorus1Enabled)

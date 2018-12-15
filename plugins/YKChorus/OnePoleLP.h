@@ -24,26 +24,21 @@
 #if !defined(__OnePoleLP_h)
 #define __OnePoleLP_h
 
-class OnePoleLP
-{
- public:
-  float inputs, outputs, lastOutput;
+class OnePoleLP {
+public:
+    float inputs, outputs, lastOutput;
 
-  OnePoleLP()
-  {
-    lastOutput = inputs = outputs = 0.0f;
-  }
+    OnePoleLP() {
+        lastOutput = inputs = outputs = 0.0f;
+    }
 
-  ~OnePoleLP()
-  {
-  }
+    ~OnePoleLP() {}
 
-  void tick(float *sample, float cutoff)
-  {
-    float p = (cutoff * 0.98f) * (cutoff * 0.98f) * (cutoff * 0.98f) * (cutoff * 0.98f);
-    outputs = (1.0f - p) * (*sample) + p * outputs;
-    *sample = outputs;
-  }
+    void tick(float *sample, float cutoff) {
+        float p = (cutoff * 0.98f) * (cutoff * 0.98f) * (cutoff * 0.98f) * (cutoff * 0.98f);
+        outputs = (1.0f - p) * (*sample) + p * outputs;
+        *sample = outputs;
+    }
 };
 
 #endif

@@ -37,6 +37,7 @@ public:
     };
 
     PluginYKChorus();
+
     ~PluginYKChorus();
 
 protected:

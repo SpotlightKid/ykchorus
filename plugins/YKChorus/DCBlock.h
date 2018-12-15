@@ -24,27 +24,22 @@
 #if !defined(__DCBlock_h)
 #define __DCBlock_h
 
-class DCBlock
-{
- public:
-  float inputs, outputs, lastOutput;
+class DCBlock {
+public:
+    float inputs, outputs, lastOutput;
 
-  DCBlock()
-  {
-    lastOutput = inputs = outputs = 0.0f;
-  }
+    DCBlock() {
+        lastOutput = inputs = outputs = 0.0f;
+    }
 
-  ~DCBlock()
-  {
-  }
+    ~DCBlock() {}
 
-  inline void tick(float *sample, float cutoff)
-  {
-    outputs     = *sample - inputs + (0.999f - cutoff * 0.4f) * outputs;
-    inputs      = *sample;
-    lastOutput  = outputs;
-    *sample     = lastOutput;
-  }
+    inline void tick(float *sample, float cutoff) {
+        outputs     = *sample - inputs + (0.999f - cutoff * 0.4f) * outputs;
+        inputs      = *sample;
+        lastOutput  = outputs;
+        *sample     = lastOutput;
+    }
 };
 
 #endif
