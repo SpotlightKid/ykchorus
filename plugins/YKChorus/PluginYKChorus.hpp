@@ -16,8 +16,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef PLUGIN_YNCHORUS_H
-#define PLUGIN_YNCHORUS_H
+#ifndef PLUGIN_YKCHORUS_H
+#define PLUGIN_YKCHORUS_H
 
 #include "DistrhoPlugin.hpp"
 #include "ChorusEngine.h"
@@ -116,4 +116,4 @@ private:
 
 END_NAMESPACE_DISTRHO
 
-#endif  // #ifndef PLUGIN_YNCHORUS_H
+#endif  // #ifndef PLUGIN_YKCHORUS_H
