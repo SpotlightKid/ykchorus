@@ -17,3 +17,6 @@ bin/ykchorus-ladspa.*
 bin/ykchorus-dssi.*
 bin/ykchorus-vst.*
 bin/ykchorus.lv2/
+
+# Geany editor project files
+*.geany
