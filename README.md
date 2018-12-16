@@ -3,6 +3,8 @@
 A chorus effect inspired by the one found in certain well-known Japanese
 vintage analog synthesizers (**Y**ou **K**now which).
 
+![screenshot](screenshot.png)
+
 
 ## Formats
 
