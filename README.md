@@ -61,9 +61,9 @@ them, to get a usable plug-in or stand-alone binary:
   and headers and pkgconf file.
 * LADSPA plug-in: [LADSPA] headers
 * LV2 plug-in: [LV2] headers
-* <del>GUI (DSSI, LV2, JACK): OpenGL development library and headers
-  and pkgconf file (provided by the `mesa` package on Linux)</del>
-  *not implemented yet*
+* GUI (JACK, LV2, VST2): OpenGL development library and headers
+  and pkgconf file (provided by the `mesa` package on Linux). On
+  Linux also X11 development library and headers and pkgconf file
 
 
 ## License
@@ -86,11 +86,14 @@ Patrick Kunz, Togu Audio Line, Inc., released under the GPL-2.0.
 Build using the DISTRHO Plugin Framework ([DPF]) and set up with the
 [cookiecutter-dpf-effect] project template.
 
+Toggle switch image by "az" from [Knob Gallery], licensed under a Creative
+Commons CC-BY.
 
 [cookiecutter-dpf-effect]: https://github.com/SpotlightKid/cookiecutter-dpf-effect
 [DPF]: https://github.com/DISTRHO/DPF
 [DSSI]: http://dssi.sourceforge.net/
 [JACK]: http://jackaudio.org/
+[Knob Gallery]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
 [LADSPA]: http://www.ladspa.org/
 [liblo]: http://liblo.sourceforge.net/
 [LV2]: http://lv2plug.in/
