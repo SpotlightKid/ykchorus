@@ -15,6 +15,10 @@ NAME = ykchorus
 FILES_DSP = \
 	PluginYKChorus.cpp
 
+FILES_UI  = \
+	PluginArtworkYKChorus.cpp \
+	PluginUIYKChorus.cpp
+
 # --------------------------------------------------------------
 # Do some magic
 
