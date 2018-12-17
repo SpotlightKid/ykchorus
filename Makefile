@@ -20,7 +20,12 @@ all: plugins gen
 
 # --------------------------------------------------------------
 
-plugins:
+dgl:
+ifeq ($(HAVE_DGL),true)
+	$(MAKE) -C dpf/dgl
+endif
+
+plugins: dgl
 	$(MAKE) all -C plugins/YKChorus
 
 ifneq ($(CROSS_COMPILING),true)
@@ -39,6 +44,7 @@ endif
 # --------------------------------------------------------------
 
 clean:
+	$(MAKE) clean -C dpf/dgl
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
 	$(MAKE) clean -C plugins/YKChorus
 	rm -rf bin build
