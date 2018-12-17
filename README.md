@@ -30,8 +30,8 @@ sub-modules) and simply run `make` in the project's root directory:
 
 ## Installation
 
-After compilation has finished, copy the desired plug-in shared libraries
-or bundles or the stand-alone program to the appropriate locations.
+After compilation has finished, copy the desired plug-in shared libraries or
+bundles or the stand-alone program to the appropriate locations.
 
 The following command line examples assume you are using a Linux system:
 
@@ -39,7 +39,18 @@ The following command line examples assume you are using a Linux system:
     $ install -Dm755 bin/ykchorus-vst.so -t ~/.vst
     $ install -Dm755 bin/ykchorus-dssi.so -t ~/.dssi
     $ install -Dm755 bin/ykchorus-ladspa.so -t ~/.ladspa
-    $ mkdir -p ~/.lv2; cp -a bin/ykchorus.lv2 -t ~/.lv2
+    $ mkdir -p ~/.lv2; cp -a bin/ykchorus.lv2 ~/.lv2
+
+The makefile provides the `install` target to execute the above commands in a
+way that should work on different platforms, but this is not very well tested
+at the moment.
+
+There is also an `install-user` target, to install the binaries in the proper
+lcoations under the current user's home directory.
+
+    make -n install-user
+
+shows you where the files would get installed, without actually doing so.
 
 
 ## Prerequisites
