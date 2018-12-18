@@ -1,6 +1,11 @@
 # Changelog
 
 
+## v0.2.2 (2018-12-18)
+
+* GUI tweaks
+
+
 ## v0.2.1 (2018-12-17)
 
 * Fix Makefile so that project actually compiles when freshly checked out /
