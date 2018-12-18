@@ -106,7 +106,6 @@ published to the **CC0 Public Domain**.
 [DPF]: https://github.com/DISTRHO/DPF
 [DSSI]: http://dssi.sourceforge.net/
 [JACK]: http://jackaudio.org/
-[Knob Gallery]:
 [LADSPA]: http://www.ladspa.org/
 [liblo]: http://liblo.sourceforge.net/
 [LV2]: http://lv2plug.in/
