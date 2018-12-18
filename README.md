@@ -97,16 +97,20 @@ Patrick Kunz, Togu Audio Line, Inc., released under the GPL-2.0.
 Build using the DISTRHO Plugin Framework ([DPF]) and set up with the
 [cookiecutter-dpf-effect] project template.
 
-Toggle switch image by "az" from [Knob Gallery], licensed under a Creative
-Commons CC-BY.
+[Toggle switch] image by "az" from *Knob Gallery*, licensed under the
+**Creative Commons CC-BY** license, [rotary knob] image by "geoghela",
+published to the **CC0 Public Domain**.
+
 
 [cookiecutter-dpf-effect]: https://github.com/SpotlightKid/cookiecutter-dpf-effect
 [DPF]: https://github.com/DISTRHO/DPF
 [DSSI]: http://dssi.sourceforge.net/
 [JACK]: http://jackaudio.org/
-[Knob Gallery]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
+[Knob Gallery]:
 [LADSPA]: http://www.ladspa.org/
 [liblo]: http://liblo.sourceforge.net/
 [LV2]: http://lv2plug.in/
 [pkgconf]: https://github.com/pkgconf/pkgconf
+[rotary knob]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=1200
 [TAL Noisemaker]: https://tal-software.com/products/tal-noisemaker
+[Toggle switch]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
