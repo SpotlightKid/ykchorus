@@ -19,6 +19,8 @@ FILES_UI  = \
 	PluginArtworkYKChorus.cpp \
 	PluginUIYKChorus.cpp
 
+ARTWORK_DIR = artwork
+
 # --------------------------------------------------------------
 # Do some magic
 
@@ -37,5 +39,8 @@ TARGETS += lv2_sep
 TARGETS += vst
 
 all: $(TARGETS)
+
+artwork: $(ARTWORK_DIR)/*.png
+	../../dpf/utils/png2rgba.py PluginArtworkYKChorus $(ARTWORK_DIR)
 
 # --------------------------------------------------------------

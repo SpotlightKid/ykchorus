@@ -26,7 +26,7 @@ ifeq ($(HAVE_DGL),true)
 endif
 
 plugins: dgl
-	$(MAKE) all -C plugins/YKChorus
+	$(MAKE) -C plugins/YKChorus all
 
 ifneq ($(CROSS_COMPILING),true)
 gen: plugins dpf/utils/lv2_ttl_generator
@@ -40,6 +40,11 @@ dpf/utils/lv2_ttl_generator:
 else
 gen:
 endif
+
+# --------------------------------------------------------------
+
+artwork:
+	$(MAKE) -C plugins/YKChorus artwork
 
 # --------------------------------------------------------------
 
