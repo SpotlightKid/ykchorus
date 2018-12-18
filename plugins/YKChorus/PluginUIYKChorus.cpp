@@ -35,19 +35,19 @@ PluginUIYKChorus::PluginUIYKChorus()
     // Knob Chorus 1 LFO Rate
     fKnobRate1 = new ImageKnob(this, knobImage, ImageKnob::Vertical);
     fKnobRate1->setId(PluginYKChorus::paramChorus1LfoRate);
-    fKnobRate1->setAbsolutePos(22, 182);
+    fKnobRate1->setImageLayerCount(30);
+    fKnobRate1->setAbsolutePos(10, 170);
     fKnobRate1->setRange(0.0f, 10.0f);
     fKnobRate1->setDefault(5.0f);
-    fKnobRate1->setRotationAngle(270);
     fKnobRate1->setCallback(this);
 
     // Knob Chorus 2 LFO Rate
     fKnobRate2 = new ImageKnob(this, knobImage, ImageKnob::Vertical);
     fKnobRate2->setId(PluginYKChorus::paramChorus2LfoRate);
-    fKnobRate2->setAbsolutePos(122, 182);
+    fKnobRate2->setImageLayerCount(30);
+    fKnobRate2->setAbsolutePos(110, 170);
     fKnobRate2->setRange(0.0f, 10.0f);
     fKnobRate2->setDefault(5.0f);
-    fKnobRate2->setRotationAngle(270);
     fKnobRate2->setCallback(this);
 
     // Switches

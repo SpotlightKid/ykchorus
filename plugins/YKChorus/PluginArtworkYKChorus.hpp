@@ -11,9 +11,9 @@ namespace PluginArtworkYKChorus
     const unsigned int backgroundHeight   = 300;
 
     extern const char* knobData;
-    const unsigned int knobDataSize = 12544;
-    const unsigned int knobWidth    = 56;
-    const unsigned int knobHeight   = 56;
+    const unsigned int knobDataSize = 768000;
+    const unsigned int knobWidth    = 80;
+    const unsigned int knobHeight   = 2400;
 
     extern const char* switch_downData;
     const unsigned int switch_downDataSize = 12544;
