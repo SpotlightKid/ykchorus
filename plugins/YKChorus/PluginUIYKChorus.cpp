@@ -36,7 +36,7 @@ PluginUIYKChorus::PluginUIYKChorus()
     fKnobRate1 = new ImageKnob(this, knobImage, ImageKnob::Vertical);
     fKnobRate1->setId(PluginYKChorus::paramChorus1LfoRate);
     fKnobRate1->setImageLayerCount(30);
-    fKnobRate1->setAbsolutePos(10, 170);
+    fKnobRate1->setAbsolutePos(10, 180);
     fKnobRate1->setRange(0.0f, 10.0f);
     fKnobRate1->setDefault(5.0f);
     fKnobRate1->setCallback(this);
@@ -45,7 +45,7 @@ PluginUIYKChorus::PluginUIYKChorus()
     fKnobRate2 = new ImageKnob(this, knobImage, ImageKnob::Vertical);
     fKnobRate2->setId(PluginYKChorus::paramChorus2LfoRate);
     fKnobRate2->setImageLayerCount(30);
-    fKnobRate2->setAbsolutePos(110, 170);
+    fKnobRate2->setAbsolutePos(110, 180);
     fKnobRate2->setRange(0.0f, 10.0f);
     fKnobRate2->setDefault(5.0f);
     fKnobRate2->setCallback(this);
