@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=YK Chorus
+Comment=A chorus audio effect
+Comment[fr]=Un effet audio de chorus
+Exec=ykchorus
+Terminal=false
+Icon=ykchorus
+Type=Application
+Categories=AudioVideo;Audio;
