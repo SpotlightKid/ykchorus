@@ -9,6 +9,8 @@ include dpf/Makefile.base.mk
 
 PREFIX ?= /usr
 BINDIR ?= $(PREFIX)/bin
+DESKTOPDIR ?= $(PREFIX)/share/applications
+ICONDIR ?= $(PREFIX)/share/pixmaps
 LIBDIR ?= $(PREFIX)/lib
 DSSI_DIR ?= $(LIBDIR)/dssi
 LADSPA_DIR ?= $(LIBDIR)/ladspa
@@ -54,7 +56,7 @@ clean:
 	$(MAKE) clean -C plugins/YKChorus
 	rm -rf bin build
 
-install:
+install: all
 	@install -Dm755 bin/ykchorus-dssi$(LIB_EXT) -t $(DESTDIR)$(DSSI_DIR)
 	@install -Dm755 bin/ykchorus-ladspa$(LIB_EXT) -t $(DESTDIR)$(LADSPA_DIR)
 	@install -Dm755 bin/ykchorus-vst$(LIB_EXT) -t $(DESTDIR)$(VST_DIR)
@@ -62,9 +64,13 @@ install:
 		cp -rf bin/ykchorus.lv2 $(DESTDIR)$(LV2_DIR)
 ifeq ($(HAVE_JACK),true)
 	@install -Dm755 bin/ykchorus$(APP_EXT) -t $(DESTDIR)$(BINDIR)
+ifeq ($(UNIX),true)
+	@install -Dm644 resources/ykchorus.desktop -t $(DESTDIR)$(DESKTOPDIR)
+	@install -Dm644 resources/ykchorus.png -t $(DESTDIR)$(ICONDIR)
+endif
 endif
 
-install-user:
+install-user: all
 	@install -Dm755 bin/ykchorus-dssi$(LIB_EXT) -t $(HOME)/.dssi
 	@install -Dm755 bin/ykchorus-ladspa$(LIB_EXT) -t $(HOME)/.ladspa
 	@install -Dm755 bin/ykchorus-vst$(LIB_EXT) -t $(HOME)/.vst
@@ -72,6 +78,10 @@ install-user:
 		cp -rf bin/ykchorus.lv2 $(HOME)/.lv2
 ifeq ($(HAVE_JACK),true)
 	@install -Dm755 bin/ykchorus$(APP_EXT) -t $(HOME)/bin
+ifeq ($(UNIX),true)
+	@install -Dm644 resources/ykchorus.desktop -t $(HOME)/.local/share/applications
+	@install -Dm644 resources/ykchorus.png -t $(HOME)/.local/share/pixmaps
+endif
 endif
 
 # --------------------------------------------------------------
