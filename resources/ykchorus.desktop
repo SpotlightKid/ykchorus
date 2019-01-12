@@ -2,6 +2,7 @@
 Version=1.0
 Name=YK Chorus
 Comment=A chorus audio effect
+Comment[de]=Ein Chorus Audioeffekt
 Comment[fr]=Un effet audio de chorus
 Exec=ykchorus
 Terminal=false
