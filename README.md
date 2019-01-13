@@ -58,23 +58,22 @@ shows you where the files would get installed, without actually doing so.
 * The GCC C++ compiler and the usual associated software build tools
   (`make`, etc.).
 
-  debian / Ubuntu users should install the `build-essential` package
+  Debian / Ubuntu users should install the `build-essential` package
   to get these.
 
 * [pkgconf]
 
-The following requirements are optional, but you must provide at least one of
-them, to get a usable plug-in or stand-alone binary:
+The [DSSI], [LV2], [LADSPA] and [VST2] (vestige) headers are included in the
+[DPF] framework, which is integrated as a Git sub-module. These need not be
+installed separately to build the software in the respective plug-in formats.
+Some formats do have additional dependencies, though:
 
-* DSSI plug-in: [DSSI] headers and [liblo] development library and headers and
-  pkgconf file
+* DSSI plug-in: and [liblo] development library and headers and pkgconf file.
 * JACK client (stand-alone command line program): [JACK] development library
   and headers and pkgconf file.
-* LADSPA plug-in: [LADSPA] headers
-* LV2 plug-in: [LV2] headers
-* GUI (JACK, LV2, VST2): OpenGL development library and headers
-  and pkgconf file (provided by the `mesa` package on Linux). On
-  Linux also X11 development library and headers and pkgconf file
+* GUI (JACK, LV2, VST2): OpenGL development library and headers and pkgconf
+  file (provided by the `mesa` package on Linux). On Linux also X11
+  development library and headers and pkgconf file.
 
 
 ## License
@@ -113,3 +112,4 @@ published to the **CC0 Public Domain**.
 [rotary knob]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=1200
 [TAL Noisemaker]: https://tal-software.com/products/tal-noisemaker
 [Toggle switch]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
+[VST2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
