@@ -19,16 +19,25 @@ VST_DIR ?= $(LIBDIR)/vst
 
 PLUGINS = YKChorus
 
+DPF_PATCHES = \
+	dpf/fix-lv2-version-export.patch \
+
 PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
 
 all: plugins gen
 
 # --------------------------------------------------------------
 
-dgl:
+dgl: patch
 ifeq ($(HAVE_DGL),true)
 	$(MAKE) -C dpf/dgl ../build/libdgl-opengl.a
 endif
+
+patch:
+	@-for p in $(DPF_PATCHES); do \
+		echo "Applying patch '$${p}'..."; \
+		patch -d dpf -p1 -N  -i ../$${p}; \
+	done
 
 plugins: dgl
 	$(MAKE) -C plugins/YKChorus all
