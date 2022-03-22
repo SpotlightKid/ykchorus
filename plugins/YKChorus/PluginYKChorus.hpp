@@ -61,7 +61,7 @@ protected:
     }
 
     const char* getLicense() const noexcept override {
-        return "GPL";
+        return "https://spdx.org/licenses/GPL-2.0-only";
     }
 
     uint32_t getVersion() const noexcept override {
