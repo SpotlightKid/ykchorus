@@ -17,6 +17,9 @@ LADSPA_DIR ?= $(LIBDIR)/ladspa
 LV2_DIR ?= $(LIBDIR)/lv2
 VST_DIR ?= $(LIBDIR)/vst
 
+PLUGINS = YKChorus
+
+PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
 
 all: plugins gen
 
@@ -56,6 +59,16 @@ clean:
 	$(MAKE) clean -C plugins/YKChorus
 	rm -rf bin build
 
+# --------------------------------------------------------------
+
+check: plugins
+	@for plug in $(PLUGINS); do \
+		lv2lint -Mpack -q -s lv2_generate_ttl -t "Plugin Author Email" \
+			-I bin/$${plug,,}.lv2/ "$(PLUGIN_BASE_URI)$${plug,,}"; \
+	done
+
+# --------------------------------------------------------------
+
 install: all
 	@install -Dm755 bin/ykchorus-dssi$(LIB_EXT) -t $(DESTDIR)$(DSSI_DIR)
 	@install -Dm755 bin/ykchorus-ladspa$(LIB_EXT) -t $(DESTDIR)$(LADSPA_DIR)
@@ -86,4 +99,4 @@ endif
 
 # --------------------------------------------------------------
 
-.PHONY: plugins
+.PHONY: all check clean gen install install-user plugins

@@ -75,6 +75,11 @@ Some formats do have additional dependencies, though:
   file (provided by the `mesa` package on Linux). On Linux also X11
   development library and headers and pkgconf file.
 
+Optional (only needed for checking plugins after building them):
+
+* [lv2lint]
+* [KXStudio LV2 Extensions]
+
 
 ## License
 
@@ -102,14 +107,16 @@ published to the **CC0 Public Domain**.
 
 
 [cookiecutter-dpf-effect]: https://github.com/SpotlightKid/cookiecutter-dpf-effect
-[DPF]: https://github.com/DISTRHO/DPF
-[DSSI]: http://dssi.sourceforge.net/
-[JACK]: http://jackaudio.org/
-[LADSPA]: http://www.ladspa.org/
+[dpf]: https://github.com/DISTRHO/DPF
+[dssi]: http://dssi.sourceforge.net/
+[jack]: http://jackaudio.org/
+[kxstudio lv2 extensions]: https://github.com/KXStudio/LV2-Extensions
+[ladspa]: http://www.ladspa.org/
 [liblo]: http://liblo.sourceforge.net/
-[LV2]: http://lv2plug.in/
+[lv2]: http://lv2plug.in/
+[lv2lint]: https://open-music-kontrollers.ch/lv2/lv2lint/
 [pkgconf]: https://github.com/pkgconf/pkgconf
 [rotary knob]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=1200
-[TAL Noisemaker]: https://tal-software.com/products/tal-noisemaker
-[Toggle switch]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
-[VST2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
+[tal noisemaker]: https://tal-software.com/products/tal-noisemaker
+[toggle switch]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
+[vst2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
