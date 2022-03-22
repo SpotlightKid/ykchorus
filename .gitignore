@@ -18,5 +18,8 @@ bin/ykchorus-dssi.*
 bin/ykchorus-vst.*
 bin/ykchorus.lv2/
 
+bin-32/
+bin-64/
+
 # Geany editor project files
 *.geany
