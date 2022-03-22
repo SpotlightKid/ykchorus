@@ -11,7 +11,7 @@ vintage analog synthesizers (**Y**ou **K**now which).
 This audio effect supports a variety of audio and plug-in frameworks:
 
 * DSSI
-* JACK (stand-alone command line program)
+* JACK (stand-alone program with GUI)
 * LADSPA
 * LV2
 * VST2
@@ -72,7 +72,7 @@ Some formats do have additional dependencies, though:
 * JACK client (stand-alone command line program): [JACK] development library
   and headers and pkgconf file.
 * GUI (JACK, LV2, VST2): OpenGL development library and headers and pkgconf
-  file (provided by the `mesa` package on Linux). On Linux also X11
+  file (provided by the `libgl` or similar package on Linux). On Linux also X11
   development library and headers and pkgconf file.
 
 Optional (only needed for checking plugins after building them):
