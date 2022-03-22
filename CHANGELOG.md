@@ -20,6 +20,8 @@ or output.
     * Added `check` make target for lv2lint check of build plugin.
     * Added `submodules` make target to check out DPF submodule and abort with
       better error if DPF is missing.
+    * Replaced `bundle-source.sh` with `create-git-archive.sh` script based on
+      `git-archive-all`.
 
 
 ## v0.2.2 (2018-12-18)
