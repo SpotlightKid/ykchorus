@@ -27,7 +27,7 @@ namespace Art = PluginArtworkYKChorus;
 
 PluginUIYKChorus::PluginUIYKChorus()
     : UI(Art::backgroundWidth, Art::backgroundHeight),
-      fImgBackground(Art::backgroundData, Art::backgroundWidth, Art::backgroundHeight, GL_BGRA)
+      fImgBackground(Art::backgroundData, Art::backgroundWidth, Art::backgroundHeight, kImageFormatBGRA)
 {
     // Knobs
     Image knobImage(Art::knobData, Art::knobWidth, Art::knobHeight);
@@ -136,7 +136,8 @@ void PluginUIYKChorus::imageKnobValueChanged(ImageKnob* knob, float value) {
 }
 
 void PluginUIYKChorus::onDisplay() {
-    fImgBackground.draw();
+    const GraphicsContext& context(getGraphicsContext());
+    fImgBackground.draw(context);
 }
 
 // -----------------------------------------------------------------------
