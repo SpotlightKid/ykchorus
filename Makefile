@@ -4,8 +4,7 @@
 # Created by falkTX
 #
 
-include dpf/Makefile.base.mk
-
+DPF_BASE_MAKEFILE = dpf/Makefile.base.mk
 
 PREFIX ?= /usr
 BINDIR ?= $(PREFIX)/bin
@@ -20,20 +19,33 @@ VST_DIR ?= $(LIBDIR)/vst
 PLUGINS = YKChorus
 
 DPF_PATCHES = \
-	dpf/fix-lv2-version-export.patch \
+	patches/dpf/fix-lv2-version-export.patch \
 
 PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
+
+-include $(DPF_BASE_MAKEFILE)
+
+# --------------------------------------------------------------
 
 all: plugins gen
 
 # --------------------------------------------------------------
+
+test_dpf:
+	@if [ ! -e dpf/Makefile.base.mk ]; then \
+		echo >&2 "error: DPF Makefile missing. Please run 'make submodules'"; \
+		false; \
+	fi
+
+submodules:
+	-test -d .git && git submodule update --init --recursive
 
 dgl: patch
 ifeq ($(HAVE_DGL),true)
 	$(MAKE) -C dpf/dgl ../build/libdgl-opengl.a
 endif
 
-patch:
+patch: test_dpf $(DPF_PATCHES)
 	@-for p in $(DPF_PATCHES); do \
 		echo "Applying patch '$${p}'..."; \
 		patch -d dpf -p1 -N  -i ../$${p}; \
@@ -108,4 +120,4 @@ endif
 
 # --------------------------------------------------------------
 
-.PHONY: all check clean gen install install-user plugins
+.PHONY: all check clean gen install install-user patch plugins submodules test_dpf
