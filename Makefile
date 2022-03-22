@@ -24,7 +24,7 @@ all: plugins gen
 
 dgl:
 ifeq ($(HAVE_DGL),true)
-	$(MAKE) -C dpf/dgl
+	$(MAKE) -C dpf/dgl ../build/libdgl-opengl.a
 endif
 
 plugins: dgl
