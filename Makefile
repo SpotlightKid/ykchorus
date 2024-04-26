@@ -79,6 +79,7 @@ PLUGINS = YKChorus
 
 DPF_PATCHES = \
 	patches/dpf/fix-lv2-version-export.patch \
+	patches/dpf/fix-generate-ttl.patch \
 
 PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
 

@@ -1,0 +1,13 @@
+diff --git a/utils/generate-ttl.sh b/utils/generate-ttl.sh
+index 0ddbb1f1..4fd38151 100755
+--- a/utils/generate-ttl.sh
++++ b/utils/generate-ttl.sh
+@@ -17,7 +17,7 @@ fi
+ PWD="$(dirname "${0}")"
+ 
+ if [ -f "${PWD}/lv2_ttl_generator.exe" ]; then
+-  GEN="${PWD}/lv2_ttl_generator.exe"
++  GEN="$(realpath ${PWD}/lv2_ttl_generator.exe)"
+   EXT=dll
+ else
+   GEN="$(realpath ${PWD}/lv2_ttl_generator)"
