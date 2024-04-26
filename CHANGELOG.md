@@ -3,13 +3,13 @@
 
 ## v0.2.4 (2024-04-26)
 
-This release add two more plugin formats. There are no changes to the plugin's
+This release adds two more plugin formats. There are no changes to the plugin's
 behaviour or output.
 
 * Added building [CLAP] format plugin.
 * Added building [VST3] format plugin.
 * Updated DPF sub-module to commit 1504e7d3 on branch `main`.
-* Updatedd readme.
+* Updated readme.
 
 
 ## v0.2.3 (2022-03-22)
@@ -55,3 +55,7 @@ or output.
 ## v0.1.0 (2018-12-14)
 
 Initial release
+
+
+[clap]: https://cleveraudio.org/
+[vst3]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
