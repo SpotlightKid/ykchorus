@@ -65,7 +65,7 @@ protected:
     }
 
     uint32_t getVersion() const noexcept override {
-        return d_version(0, 2, 3);
+        return d_version(0, 2, 4);
     }
 
     // Go to:
@@ -117,3 +117,4 @@ private:
 END_NAMESPACE_DISTRHO
 
 #endif  // #ifndef PLUGIN_YKCHORUS_H
+
