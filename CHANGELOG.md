@@ -1,13 +1,24 @@
 # Changelog
 
 
+## v0.2.4 (2024-04-26)
+
+This release add two more plugin formats. There are no changes to the plugin's
+behaviour or output.
+
+* Added building [CLAP] format plugin.
+* Added building [VST3] format plugin.
+* Updated DPF sub-module to commit 1504e7d3 on branch `main`.
+* Updatedd readme.
+
+
 ## v0.2.3 (2022-03-22)
 
 This is a maintenance release. There are no changes to the plugin's behaviour
 or output.
 
 * Added `.desktop` and icon for the JACK stand-alone program.
-* Updated DPF sub-module to commit 86a621bf on branch main.
+* Updated DPF sub-module to commit 86a621bf on branch `main`.
 * Added patch for DPF to fix plugin version numbering.
 * Changed plugin license field to SPDX URL.
 * Updated code using deprecated DGL call signatures.
