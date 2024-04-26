@@ -10,11 +10,13 @@ vintage analog synthesizers (**Y**ou **K**now which).
 
 This audio effect supports a variety of audio and plug-in frameworks:
 
+* CLAP
 * DSSI
 * JACK (stand-alone program with GUI)
 * LADSPA
 * LV2
 * VST2
+* VST3
 
 
 ## Compiling
@@ -30,27 +32,44 @@ sub-modules) and simply run `make` in the project's root directory:
 
 ## Installation
 
-After compilation has finished, copy the desired plug-in shared libraries or
-bundles or the stand-alone program to the appropriate locations.
+To install all plugin formats to their appropriate system-wide location, run
+the following command (root priviledges may be required):
 
-The following command line examples assume you are using a Linux system:
+    make install
 
-    $ install -Dm755 bin/ykchorus -t ~/bin
-    $ install -Dm755 bin/ykchorus-vst.so -t ~/.vst
-    $ install -Dm755 bin/ykchorus-dssi.so -t ~/.dssi
-    $ install -Dm755 bin/ykchorus-ladspa.so -t ~/.ladspa
-    $ mkdir -p ~/.lv2; cp -a bin/ykchorus.lv2 ~/.lv2
+The makefiles support the usual `PREFIX` and `DESTDIR` variables to change the
+installation prefix and set an installation root directory (defaulty: empty).
+`PREFIX` defaults to `/usr/local`, but on macOS and Windows it is not used,
+since the system-wide installation directories for plugins are fixed.
 
-The makefile provides the `install` target to execute the above commands in a
-way that should work on different platforms, but this is not very well tested
-at the moment.
+Use make's `-n` option to see where the plugins would be installed without
+actually installing them.
 
-There is also an `install-user` target, to install the binaries in the proper
-lcoations under the current user's home directory.
+You can also set the installation directory for each plugin format with a
+dedicated makefile variable.
 
-    make -n install-user
+* CLAP: `CLAP_DIR` (`<prefix>/lib/clap`)
+* LADSPA: `LADSPA_DIR` (`<prefix>/lib/ladspa`)
+* LV2: `LV2_DIR` (`<prefix>/lib/lv2`)
+* VST2: `VST2_DIR` (`<prefix>/lib/vst`)
+* VST3: `VST3_DIR` (`<prefix>/lib/vst3`)
 
-shows you where the files would get installed, without actually doing so.
+Example: `make DESTDIR=/tmp/build-root VST_DIR=/usr/lib/lxvst install`
+
+To install the plugins only for your current user account, run
+`make install-user`.
+
+Again, you can also set the installation directory for each plugin format with
+a dedicated makefile variable.
+
+* CLAP: `USER_CLAP_DIR` (`$HOME/.clap`)
+* LADSPA: `USER_LADSPA_DIR` (`$HOME/.ladspa`)
+* LV2: `USER_LV2_DIR` (`$HOME/.lv2`)
+* VST2: `USER_VST2_DIR` (`$HOME/.vst`)
+* VST3: `USER_VST3_DIR` (`$HOME/.vst3`)
+
+*Note: The given default values for all of the above listed environment
+variables differ depending on the target OS.*
 
 
 ## Prerequisites
@@ -61,19 +80,21 @@ shows you where the files would get installed, without actually doing so.
   Debian / Ubuntu users should install the `build-essential` package
   to get these.
 
+* `patch`
+
 * [pkgconf]
 
-The [DSSI], [LV2], [LADSPA] and [VST2] (vestige) headers are included in the
-[DPF] framework, which is integrated as a Git sub-module. These need not be
+The [CLAP], [LV2], [LADSPA], [VST]2 (vestige) and VST3 headers are included in
+the [DPF] framework, which is integrated as a Git sub-module. These need not be
 installed separately to build the software in the respective plug-in formats.
+
 Some formats do have additional dependencies, though:
 
-* DSSI plug-in: and [liblo] development library and headers and pkgconf file.
 * JACK client (stand-alone command line program): [JACK] development library
   and headers and pkgconf file.
 * GUI (JACK, LV2, VST2): OpenGL development library and headers and pkgconf
-  file (provided by the `libgl` or similar package on Linux). On Linux also X11
-  development library and headers and pkgconf file.
+  file (provided by the `libglvnd` or similar package on Linux). On Linux also
+  X11 development library and headers and pkgconf file.
 
 Optional (only needed for checking plugins after building them):
 
@@ -105,7 +126,7 @@ Build using the DISTRHO Plugin Framework ([DPF]) and set up with the
 **Creative Commons CC-BY** license, [rotary knob] image by "geoghela",
 published to the **CC0 Public Domain**.
 
-
+[clap]: https://cleveraudio.org/
 [cookiecutter-dpf-effect]: https://github.com/SpotlightKid/cookiecutter-dpf-effect
 [dpf]: https://github.com/DISTRHO/DPF
 [dssi]: http://dssi.sourceforge.net/
@@ -119,4 +140,5 @@ published to the **CC0 Public Domain**.
 [rotary knob]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=1200
 [tal noisemaker]: https://tal-software.com/products/tal-noisemaker
 [toggle switch]: https://www.g200kg.com/en/webknobman/gallery.php?m=p&p=58
-[vst2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
+[vst]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
+
