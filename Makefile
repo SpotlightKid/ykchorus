@@ -4,17 +4,76 @@
 # Created by falkTX
 #
 
-DPF_BASE_MAKEFILE = dpf/Makefile.base.mk
+# error out if DPF is missing, unless the current rule is 'submodules'
+define MISSING_SUBMODULES_ERROR
+=============================================================================
+DPF library not found in directory 'dpf'.
+Please run "make submodules" to clone the missing Git submodules, then retry.
+=============================================================================
+endef
 
-PREFIX ?= /usr
+ifneq ($(MAKECMDGOALS), submodules)
+ifeq (,$(wildcard dpf/Makefile.base.mk))
+    $(info $(MISSING_SUBMODULES_ERROR))
+    $(error Unable to continue)
+else
+    include dpf/Makefile.base.mk
+endif
+endif
+
+# --------------------------------------------------------------
+# Installation directories
+
+PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
+LIBDIR ?= $(PREFIX)/lib
 DESKTOPDIR ?= $(PREFIX)/share/applications
 ICONDIR ?= $(PREFIX)/share/pixmaps
-LIBDIR ?= $(PREFIX)/lib
 DSSI_DIR ?= $(LIBDIR)/dssi
 LADSPA_DIR ?= $(LIBDIR)/ladspa
+ifneq ($(MACOS_OR_WINDOWS),true)
 LV2_DIR ?= $(LIBDIR)/lv2
-VST_DIR ?= $(LIBDIR)/vst
+VST2_DIR ?= $(LIBDIR)/vst
+VST3_DIR ?= $(LIBDIR)/vst3
+CLAP_DIR ?= $(LIBDIR)/clap
+endif
+ifeq ($(MACOS),true)
+LV2_DIR ?= /Library/Audio/Plug-Ins/LV2
+VST2_DIR ?= /Library/Audio/Plug-Ins/VST
+VST3_DIR ?= /Library/Audio/Plug-Ins/VST3
+CLAP_DIR ?= /Library/Audio/Plug-Ins/CLAP
+endif
+ifeq ($(WINDOWS),true)
+LV2_DIR ?= $(COMMONPROGRAMFILES)/LV2
+VST2_DIR ?= $(COMMONPROGRAMFILES)/VST2
+VST3_DIR ?= $(COMMONPROGRAMFILES)/VST3
+CLAP_DIR ?= $(COMMONPROGRAMFILES)/CLAP
+endif
+
+USER_DSSI_DIR ?= $(HOME)/.dssi
+USER_LADSPA_DIR ?= $(HOME)/.ladspa
+ifneq ($(MACOS_OR_WINDOWS),true)
+USER_LV2_DIR ?= $(HOME)/.lv2
+USER_VST2_DIR ?= $(HOME)/.vst
+USER_VST3_DIR ?= $(HOME)/.vst3
+USER_CLAP_DIR ?= $(HOME)/.clap
+endif
+ifeq ($(MACOS),true)
+USER_LV2_DIR ?= $(HOME)/Library/Audio/Plug-Ins/LV2
+USER_VST2_DIR ?= $(HOME)/Library/Audio/Plug-Ins/VST
+USER_VST3_DIR ?= $(HOME)/Library/Audio/Plug-Ins/VST3
+USER_CLAP_DIR ?= $(HOME)/Library/Audio/Plug-Ins/CLAP
+endif
+ifeq ($(WINDOWS),true)
+USER_LV2_DIR ?= $(APPDATA)/LV2
+USER_VST2_DIR ?= $(APPDATA)/VST
+USER_VST3_DIR ?= $(APPDATA)/VST3
+USER_CLAP_DIR ?= $(APPDATA)/CLAP
+endif
+
+export DESTDIR PREFIX BINDIR LIBDIR
+export DSSI_DIR LADSPA_DIR LV2_DIR VST2_DIR VST3_DIR CLAP_DIR
+export USER_DSSI_DIR USER_LADSPA_DIR USER_LV2_DIR USER_VST2_DIR USER_VST3_DIR USER_CLAP_DIR
 
 PLUGINS = YKChorus
 
@@ -23,66 +82,55 @@ DPF_PATCHES = \
 
 PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
 
--include $(DPF_BASE_MAKEFILE)
-
 # --------------------------------------------------------------
+# Targets
 
-all: plugins gen
-
-# --------------------------------------------------------------
-
-test_dpf:
-	@if [ ! -e dpf/Makefile.base.mk ]; then \
-		echo >&2 "error: DPF Makefile missing. Please run 'make submodules'"; \
-		false; \
-	fi
+all: libs plugins gen
 
 submodules:
-	-test -d .git && git submodule update --init --recursive
+	git submodule update --init --recursive
 
-dgl: patch
-ifeq ($(HAVE_DGL),true)
-	$(MAKE) -C dpf/dgl ../build/libdgl-opengl.a
-endif
-
-patch: test_dpf $(DPF_PATCHES)
+patch: $(DPF_PATCHES)
 	@-for p in $(DPF_PATCHES); do \
 		echo "Applying patch '$${p}'..."; \
-		patch -d dpf -p1 -N  -i ../$${p}; \
+		patch -d dpf -p1 -N -r - -i ../$${p}; \
 	done
 
-plugins: dgl
-	$(MAKE) -C plugins/YKChorus all
+artwork:
+	@for plug in $(PLUGINS); do \
+		$(MAKE) -C plugins/$${plug} artwork; \
+	done
+
+libs: patch
+	$(MAKE) -C dpf/dgl "../build/libdgl-opengl.a"
+
+plugins: $(PLUGINS)
+
+$(PLUGINS): artwork libs
+	$(MAKE) all -C plugins/$@
 
 ifneq ($(CROSS_COMPILING),true)
 gen: plugins dpf/utils/lv2_ttl_generator
-	@$(CURDIR)/dpf/utils/generate-ttl.sh
+	@dpf/utils/generate-ttl.sh
 ifeq ($(MACOS),true)
-	@$(CURDIR)/dpf/utils/generate-vst-bundles.sh
+	@dpf/utils/generate-vst-bundles.sh
 endif
 
 dpf/utils/lv2_ttl_generator:
 	$(MAKE) -C dpf/utils/lv2-ttl-generator
 else
-gen:
+gen: plugins dpf/utils/lv2_ttl_generator.exe
+	@dpf/utils/generate-ttl.sh
+
+dpf/utils/lv2_ttl_generator.exe:
+	$(MAKE) -C dpf/utils/lv2-ttl-generator WINDOWS=true
 endif
 
 # --------------------------------------------------------------
 
-artwork:
-	$(MAKE) -C plugins/YKChorus artwork
-
-# --------------------------------------------------------------
-
-clean:
-	$(MAKE) clean -C dpf/dgl
-	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
-	$(MAKE) clean -C plugins/YKChorus
-	rm -rf bin build
-
-# --------------------------------------------------------------
-
-check: plugins
+check: gen
+	@echo "Please make sure you have the https://github.com/KXStudio/LV2-Extensions bundles"
+	@echo "installed somewhere on your LV2_PATH."
 	@for plug in $(PLUGINS); do \
 		lv2lint -Mpack -q -s lv2_generate_ttl -t "Plugin Author Email" \
 			-I bin/$${plug,,}.lv2/ "$(PLUGIN_BASE_URI)$${plug,,}"; \
@@ -90,34 +138,24 @@ check: plugins
 
 # --------------------------------------------------------------
 
+clean:
+	$(MAKE) clean -C dpf/dgl
+	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
+	@for plug in $(PLUGINS); do \
+		$(MAKE) clean -C plugins/$${plug}; \
+	done
+
 install: all
-	@install -Dm755 bin/ykchorus-dssi$(LIB_EXT) -t $(DESTDIR)$(DSSI_DIR)
-	@install -Dm755 bin/ykchorus-ladspa$(LIB_EXT) -t $(DESTDIR)$(LADSPA_DIR)
-	@install -Dm755 bin/ykchorus-vst$(LIB_EXT) -t $(DESTDIR)$(VST_DIR)
-	@install -dm755 $(DESTDIR)$(LV2_DIR) && \
-		cp -rf bin/ykchorus.lv2 $(DESTDIR)$(LV2_DIR)
-ifeq ($(HAVE_JACK),true)
-	@install -Dm755 bin/ykchorus$(APP_EXT) -t $(DESTDIR)$(BINDIR)
-ifeq ($(UNIX),true)
-	@install -Dm644 resources/ykchorus.desktop -t $(DESTDIR)$(DESKTOPDIR)
-	@install -Dm644 resources/ykchorus.png -t $(DESTDIR)$(ICONDIR)
-endif
-endif
+	@for plug in $(PLUGINS); do \
+		$(MAKE) install -C plugins/$${plug}; \
+	done
 
 install-user: all
-	@install -Dm755 bin/ykchorus-dssi$(LIB_EXT) -t $(HOME)/.dssi
-	@install -Dm755 bin/ykchorus-ladspa$(LIB_EXT) -t $(HOME)/.ladspa
-	@install -Dm755 bin/ykchorus-vst$(LIB_EXT) -t $(HOME)/.vst
-	@install -dm755 $(HOME)/.lv2 && \
-		cp -rf bin/ykchorus.lv2 $(HOME)/.lv2
-ifeq ($(HAVE_JACK),true)
-	@install -Dm755 bin/ykchorus$(APP_EXT) -t $(HOME)/bin
-ifeq ($(UNIX),true)
-	@install -Dm644 resources/ykchorus.desktop -t $(HOME)/.local/share/applications
-	@install -Dm644 resources/ykchorus.png -t $(HOME)/.local/share/pixmaps
-endif
-endif
+	@for plug in $(PLUGINS); do \
+		$(MAKE) install-user -C plugins/$${plug}; \
+	done
 
 # --------------------------------------------------------------
 
-.PHONY: all check clean gen install install-user patch plugins submodules test_dpf
+.PHONY: all clean gen install install-user libs lv2lint patch plugins submodule
+

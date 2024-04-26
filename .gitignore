@@ -13,10 +13,12 @@
 .DS_Store
 
 bin/ykchorus
-bin/ykchorus-ladspa.*
-bin/ykchorus-dssi.*
-bin/ykchorus-vst.*
+bin/ykchorus.clap
 bin/ykchorus.lv2/
+bin/ykchorus.vst3/
+bin/ykchorus-dssi.*
+bin/ykchorus-ladspa.*
+bin/ykchorus-vst.*
 
 bin-32/
 bin-64/
