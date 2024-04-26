@@ -49,7 +49,7 @@ void PluginYKChorus::initParameter(uint32_t index, Parameter& parameter) {
     parameter.ranges.min = 0.0f;
     parameter.ranges.max = 1.0f;
     parameter.ranges.def = 0.0f;
-    parameter.hints = kParameterIsAutomable;
+    parameter.hints = kParameterIsAutomatable;
 
     switch (index) {
         case paramChorus1Enable:
@@ -201,3 +201,4 @@ Plugin* createPlugin() {
 // -----------------------------------------------------------------------
 
 END_NAMESPACE_DISTRHO
+
