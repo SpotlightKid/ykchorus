@@ -78,8 +78,7 @@ export USER_DSSI_DIR USER_LADSPA_DIR USER_LV2_DIR USER_VST2_DIR USER_VST3_DIR US
 PLUGINS = YKChorus
 
 DPF_PATCHES = \
-	patches/dpf/fix-lv2-version-export.patch \
-	patches/dpf/fix-generate-ttl.patch \
+	patches/dpf/fix-lv2-version-export.patch
 
 PLUGIN_BASE_URI = https://chrisarndt.de/plugins/
 
