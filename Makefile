@@ -4,6 +4,8 @@
 # Created by falkTX
 #
 
+SKIP_NATIVE_AUDIO_FALLBACK ?= true
+
 # error out if DPF is missing, unless the current rule is 'submodules'
 define MISSING_SUBMODULES_ERROR
 =============================================================================
