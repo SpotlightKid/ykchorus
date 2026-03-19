@@ -33,6 +33,7 @@ public:
         paramChorus2Enable,
         paramChorus1LfoRate,
         paramChorus2LfoRate,
+        paramChorusRatio,
         paramCount
     };
 

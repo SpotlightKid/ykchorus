@@ -56,7 +56,7 @@ private:
     Image fImgBackground;
 
     ScopedPointer<ImageSwitch> fSwitchChorus1Enable, fSwitchChorus2Enable;
-    ScopedPointer<ImageKnob> fKnobRate1, fKnobRate2;
+    ScopedPointer<ImageKnob> fKnobRate1, fKnobRate2, fKnobRatio;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginUIYKChorus)
 };
