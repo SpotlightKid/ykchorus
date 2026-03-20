@@ -76,6 +76,13 @@ void PluginYKChorus::initParameter(uint32_t index, Parameter& parameter) {
             parameter.ranges.max = 10.0f;
             parameter.ranges.def = 8.3f;
             break;
+        case paramChorusLevel:
+            parameter.name = "Chorus 2 Level";
+            parameter.symbol = "chorus_2_level";
+            parameter.ranges.min = 0.1f;
+            parameter.ranges.max = 1.5f;
+            parameter.ranges.def = 0.9f;
+            break;
     }
 }
 
@@ -136,6 +143,9 @@ void PluginYKChorus::setParameterValue(uint32_t index, float value) {
         case paramChorus2LfoRate:
             cengine->setChorus2LfoRate(value / 10.0f);
             break;
+        case paramChorusLevel:
+            cengine->setChorusLevel(value / 1.0f);
+            break;
     }
 }
 
@@ -151,18 +161,21 @@ void PluginYKChorus::loadProgram(uint32_t index) {
             setParameterValue(paramChorus2Enable, 0.0f);
             setParameterValue(paramChorus1LfoRate, 5.0f);
             setParameterValue(paramChorus2LfoRate, 8.3f);
+            setParameterValue(paramChorusLevel, 0.9f);
             break;
         case 1:
             setParameterValue(paramChorus1Enable, 0.0f);
             setParameterValue(paramChorus2Enable, 1.0f);
             setParameterValue(paramChorus1LfoRate, 5.0f);
             setParameterValue(paramChorus2LfoRate, 8.3f);
+            setParameterValue(paramChorusLevel, 0.9f);            
             break;
         case 2:
             setParameterValue(paramChorus1Enable, 1.0f);
             setParameterValue(paramChorus2Enable, 1.0f);
             setParameterValue(paramChorus1LfoRate, 5.0f);
             setParameterValue(paramChorus2LfoRate, 8.3f);
+            setParameterValue(paramChorusLevel, 0.9f);            
             break;
     }
 }

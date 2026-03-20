@@ -50,6 +50,15 @@ PluginUIYKChorus::PluginUIYKChorus()
     fKnobRate2->setDefault(5.0f);
     fKnobRate2->setCallback(this);
 
+    // Knob Level 
+    fKnobLevel = new ImageKnob(this, knobImage, ImageKnob::Vertical);
+    fKnobLevel->setId(PluginYKChorus::paramChorusLevel);
+    fKnobLevel->setImageLayerCount(30);
+    fKnobLevel->setAbsolutePos(60, 130);
+    fKnobLevel->setRange(0.0f, 1.5f);
+    fKnobLevel->setDefault(0.9f);
+    fKnobLevel->setCallback(this);
+
     // Switches
 
     // Switch Chorus 1 On/Off
@@ -86,6 +95,9 @@ void PluginUIYKChorus::parameterChanged(uint32_t index, float value) {
             break;
         case PluginYKChorus::paramChorus2LfoRate:
             fKnobRate2->setValue(value);
+            break;
+        case PluginYKChorus::paramChorusLevel:
+            fKnobLevel->setValue(value);
             break;
     }
 }

@@ -34,6 +34,7 @@ public:
     Chorus *chorus1R;
     Chorus *chorus2L;
     Chorus *chorus2R;
+    float c_ratio;
 
     DCBlock *dcBlock1L;
     DCBlock *dcBlock1R;
@@ -81,6 +82,9 @@ public:
         chorus2L->setLfoRate(rate);
         chorus2R->setLfoRate(rate);
     }
+    void setChorusLevel(float rate) {
+        c_ratio=rate;
+    }
 
     void setUpChorus(float sampleRate) {
         chorus1L = new Chorus(sampleRate, 1.0f, 0.5f, 7.0f);
@@ -106,8 +110,8 @@ public:
             dcBlock2L->tick(&resultL, 0.01f);
             dcBlock2R->tick(&resultR, 0.01f);
         }
-        *sampleL = *sampleL + resultL * 1.4f;
-        *sampleR = *sampleR + resultR * 1.4f;
+        *sampleL = *sampleL + resultL * c_ratio;
+        *sampleR = *sampleR + resultR * c_ratio;
     }
 };
 
